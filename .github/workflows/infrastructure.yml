@@ -44,7 +44,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform -chdir=infrastructure plan -no-color -input=false -var SSH_KEY=${{ secrets.TF_VAR_SSH_KEY }} -var SSH_PUB_KEY=${{ secrets.TF_VAR_SSH_PUB_KEY }} -var HCLOUD_TOKEN=${{ secrets.TF_VAR_HCLOUD_TOKEN }}
+        run: terraform -chdir=infrastructure plan -no-color -input=false -var "SSH_KEY=${{ secrets.TF_VAR_SSH_KEY }}" -var "SSH_PUB_KEY=${{ secrets.TF_VAR_SSH_PUB_KEY }}" -var "HCLOUD_TOKEN=${{ secrets.TF_VAR_HCLOUD_TOKEN }}"
         continue-on-error: true
 
       - name: Update Pull Request

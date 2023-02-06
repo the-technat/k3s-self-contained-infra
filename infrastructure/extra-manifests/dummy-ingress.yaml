@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dummy-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/permanent-redirect: https://alleaffengaffen.ch
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: test.los.alleaffengaffen.ch
+  tls:
+  - hosts:
+    - test.los.alleaffengaffen.ch
+    secretName: los-test

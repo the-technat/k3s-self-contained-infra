@@ -99,14 +99,17 @@ module "kube-hetzner" {
 ipam:
   mode: kubernetes
 devices: "eth1"
+operator:
+  replicas: 1
 k8s:
   requireIPv4PodCIDR: true
 kubeProxyReplacement: strict
+priorityClassName: "system-node-critical"
 l7Proxy: false
 encryption:
   enabled: true
   type: wireguard
-  EOT 
+  EOT
 
   # Cert manager, all cert-manager helm values can be found at https://github.com/cert-manager/cert-manager/blob/master/deploy/charts/cert-manager/values.yaml
   # The following is an example, please note that the current indentation inside the EOT is important.

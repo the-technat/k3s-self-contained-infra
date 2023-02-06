@@ -4,6 +4,8 @@ The infrastructure for the image factory consists of a single-node K3s cluster o
 
 ## Prerequisites
 
+The way we are coming to make this happen:
+
 1. Create a Hetzner Account
 2. Create a Hetzner Project
 3. Invite members to Project
@@ -25,19 +27,22 @@ The infrastructure for the image factory consists of a single-node K3s cluster o
 - use cli-driven workflow
 - set execution mode to local
 
-8. Create new user Token in TFC
+8. Create new user token in TFC
 
 - add it as `TF_API_TOKEN` to the github environment env secret list
 
 ## Continuous Deployment
 
-End goal: github actions pipeline with secrets from the repo deploying the infra over and over, changes cause eventual recreating but this is safe as data should be stored in another location.
+A Github Actions Workflow called "Infrastructure" tries to match the desired state with the actual state. All changes in this repo are applied automatically if we are on branch `main`.
 
-Runner environment:
+## To Do
 
-- hcloud
-- kubectl
-- terraform
+Nothing is perfect and this just started so there is a lot do to
+
+- Deployment currently doesn't work
+- Vars have to passed in on the command-line, env vars using `TF_VAR_` are not recognized
+- Github Environment currently doesn´t allow plans on arbitrary branches
+- Terraform Cloud is only used for state, maybe github has some feature to remove this dependency (since secrets are also not managed there...)
 
 ## Acknowledgements
 
