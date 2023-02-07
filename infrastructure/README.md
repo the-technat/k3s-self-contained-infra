@@ -14,7 +14,7 @@ The way we are coming to make this happen:
 - one for final builds
 - one for cache artifacts
 
-5. Create new environment in Github Repo and add some secrets:
+5. Create some Repository Secrets:
 
 - `TF_VAR_HCLOUD_TOKEN`: env secret containing a token that has access to your created hcloud project
 - `TF_VAR_SSH_KEY`: env secret  private ed25519 ssh key that github uses to manage infrastructure
@@ -29,19 +29,19 @@ The way we are coming to make this happen:
 
 8. Create new user token in TFC
 
-- add it as `TF_API_TOKEN` to the github environment env secret list
+- add it as `TF_API_TOKEN` to the repository secrets
 
 ## Continuous Deployment
 
-A Github Actions Workflow called "Infrastructure" tries to match the desired state with the actual state. All changes in this repo are applied automatically if we are on branch `main`.
+A Github Actions Workflow called "Continuous Deployment" tries to match the desired state with the actual state. All changes in this repo are applied automatically if we are on branch `main`.
+
+All other branches and pull-requests get terraform checks to ensure integrity.
 
 ## To Do
 
 Nothing is perfect and this just started so there is a lot do to
 
 - Deployment currently doesn't work
-- Vars have to passed in on the command-line, env vars using `TF_VAR_` are not recognized
-- Github Environment currently doesn´t allow plans on arbitrary branches
 - Terraform Cloud is only used for state, maybe github has some feature to remove this dependency (since secrets are also not managed there...)
 
 ## Acknowledgements

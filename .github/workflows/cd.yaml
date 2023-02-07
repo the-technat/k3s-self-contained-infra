@@ -1,0 +1,33 @@
+name: "Continuous Deployment"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cd:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    permissions: write-all
+    env:
+      TF_VAR_HCLOUD_TOKEN: ${{ secrets.TF_VAR_HCLOUD_TOKEN }}
+      TF_VAR_SSH_KEY: ${{ secrets.TF_VAR_SSH_KEY }}
+      TF_VAR_SSH_PUB_KEY: ${{ secrets.TF_VAR_SSH_PUB_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: 3bit/setup-hcloud@v2
+      - run: hcloud version
+        env:
+          HCLOUD_TOKEN: ${{ secrets.TF_VAR_HCLOUD_TOKEN }}
+      - uses: jberger/action-install-kubectl@master
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Terraform Init
+        id: init
+        run: terraform -chdir=infrastructure init
+      - name: Terraform Apply
+        run: env && terraform -chdir=infrastructure apply -auto-approve -input=false
