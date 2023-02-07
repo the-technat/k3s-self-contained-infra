@@ -5,6 +5,8 @@ on:
     branches:
       - main
 
+concurrency: 1
+
 jobs:
   cd:
     name: "Terraform"
