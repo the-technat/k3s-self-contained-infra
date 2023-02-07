@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
 - clusterissuer-le-staging.yaml
 - clusterissuer-le.yaml
-- dummy-ingress.yaml

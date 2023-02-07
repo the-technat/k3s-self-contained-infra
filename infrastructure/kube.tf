@@ -1,4 +1,5 @@
 module "kube-hetzner" {
+  count = 0
   providers = {
     hcloud = hcloud
   }
