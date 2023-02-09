@@ -32,4 +32,4 @@ jobs:
         id: init
         run: terraform -chdir=infrastructure init
       - name: Terraform Apply
-        run: env && terraform -chdir=infrastructure apply -auto-approve -input=false
+        run: terraform -chdir=infrastructure apply -auto-approve -input=false

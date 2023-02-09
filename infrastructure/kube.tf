@@ -1,5 +1,4 @@
 module "kube-hetzner" {
-  count = 0
   providers = {
     hcloud = hcloud
   }
@@ -11,10 +10,11 @@ module "kube-hetzner" {
   ssh_port                   = 59245
   ssh_public_key             = var.SSH_PUB_KEY
   ssh_private_key            = var.SSH_KEY
-  ssh_additional_public_keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJov21J2pGxwKIhTNPHjEkDy90U8VJBMiAodc2svmnFC cardno:000618187880"]
+  ssh_additional_public_keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJov21J2pGxwKIhTNPHjEkDy90U8VJBMiAodc2svmnFC cardno:000618187880", "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAWmQVmSaphva2mWxBymyT84RPC9hWkX7FROq8SugDeM1LV5x8Z8mOZGpMTwma/gX4DrrBzVQzLHdTJfwH9K53FmUUHeOpda3u33qi5H+PThE6F8uRd/btt1rtPR2icx3yIV00gsyklaT12oWJE0zi6rZm3aromO1txINk13w5KkpdE2EimNnV8E2P1lu04/ylLtdHVjxfqyqzyf9rCljgvFAQb/P1viP4UYHQ5HuqrX7iuYP7aB9H6A7aMn6EBjkZ879OIbqYslDkrzpsos5q/DRvtgiaQW4Z2p+MpW5kJsjGxVtPL41sR6U6tC86gQmRQunz3vKyceVzAIAs1k4t janick@hellmachine"]
   network_region             = "eu-central"
-  base_domain                = "los.alleaffengaffen.ch"
-  additional_tls_sans        = ["cp.los.alleaffengaffen.ch"]
+  base_domain                = "los-microg.alleaffengaffen.ch"
+  lb_hostname                = "los-microg.alleaffengaffen.ch"
+  additional_tls_sans        = ["cp.los-microg.alleaffengaffen.ch"]
 
   ## Compute
   control_plane_nodepools = [
@@ -68,7 +68,6 @@ module "kube-hetzner" {
   cni_plugin             = "cilium"
   disable_network_policy = true # use the one from cilium
   enable_cert_manager    = true
-  lb_hostname            = "los.alleaffengaffen.ch"
   create_kustomization   = false # don't dump arbitray files to ephemeral runner fs
 
   # If you want to allow all outbound traffic you can set this to "false". Default is "true".
