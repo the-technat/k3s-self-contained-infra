@@ -46,6 +46,13 @@ module "kube-hetzner" {
       location    = "hel1"
       min_nodes   = 0
       max_nodes   = 5
+    },
+    {
+      name        = "test-runners"
+      server_type = "cpx31"
+      location    = "hel1"
+      min_nodes   = 0
+      max_nodes   = 5
     }
   ]
 
