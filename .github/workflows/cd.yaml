@@ -30,6 +30,6 @@ jobs:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
       - name: Terraform Init
         id: init
-        run: terraform -chdir=infrastructure init
+        run: terraform init
       - name: Terraform Apply
-        run: terraform -chdir=infrastructure apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false

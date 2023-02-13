@@ -23,17 +23,17 @@ jobs:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
       - name: Terraform Format
         id: fmt
-        run: terraform -chdir infrastructure fmt -check
+        run: terraform fmt -check
       - name: Terraform Init
         id: init
-        run: terraform -chdir infrastructure init
+        run: terraform init
       - name: Terraform Validate
         id: validate
-        run: terraform -chdir infrastracture validate -no-color
+        run: terraform validate -no-color
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform -chdir=infrastructure plan -no-color -input=false
+        run: terraform plan -no-color -input=false
         continue-on-error: true
       - name: Update Pull Request
         uses: actions/github-script@v6
