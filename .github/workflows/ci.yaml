@@ -16,7 +16,7 @@ jobs:
       TF_VAR_SSH_PUB_KEY: ${{ secrets.TF_VAR_SSH_PUB_KEY }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v2
         with:
